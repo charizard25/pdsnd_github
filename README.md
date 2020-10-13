@@ -1,11 +1,11 @@
 ### Date created
-October 13, 2020
+October 13th, 2020
 
 ### Project Title
 Explore US Bikeshare database
 
 ### Description
-Program purpose is to allow users explore the US bikeshare system database and retrive statistical info from the database. User can filter info by city, month and weekday.
+Purpose of the program is to allow users explore the US bikeshare system database and retrive statistical info from database. Users can filter info by city, month and weekday.
 
 ### Files used
 bikeshare.py
