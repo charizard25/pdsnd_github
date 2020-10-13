@@ -1,15 +1,17 @@
 ### Date created
-Include the date you created this project and README file.
+October 13, 2020
 
 ### Project Title
-Replace the Project Title
+Explore US Bikeshare database
 
 ### Description
-Describe what your project is about and what it does
+Program purpose is to allow users explore the US bikeshare system database and retrive statistical info from the database. User can filter info by city, month and weekday.
 
 ### Files used
-Include the files used
+bikeshare.py
+chicago.csv
+new_york_city.csv
+washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+https://www.motivateco.com/
