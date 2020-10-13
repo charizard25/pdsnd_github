@@ -179,55 +179,6 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
-def duration_in_mins(datum, city):
-    """
-        Takes as input a dictionary containing info about a single trip (datum) and
-        its origin city (city) and returns the trip duration in units of minutes.
-        Washington is in terms of milliseconds while Chicago and NYC
-        are in terms of seconds.
-    """
-    from datetime import datetime
-    if city == 'New York City':
-        duration = float(datum['tripduration']) / 60
-    elif city == 'Chicago':
-        duration = float(datum['tripduration']) / 60
-    elif city == 'Washington':
-        duration = float(datum['Duration (ms)']) / 60000
-    return duration
-
-tests = {'New York City': 13.9833, 'Chicago': 15.4333, 'Washington': 7.1231}
-for city in tests:
-    assert (abs(duration_in_mins(example_trips[city], city) - tests[city]) < .001)
-
-
-def time_of_trip(datum, city):
-    """
-    Takes input a dictionary containing info about a single trip (datum) and
-    its origin city (city) and returns the month, hour, and day of the week in
-    which the trip was made.
-    NYC includes seconds, while Washington and Chicago do not.
-    """
-    from datetime import datetime
-    if city == 'New York City':
-        starttime = datum['starttime']
-        d1 = datetime.strptime(starttime, '%m/%d/%Y %H:%M:%S')
-        day_of_week=d1.strftime('%A')
-        return (d1.month, d1.hour, day_of_week)
-    elif city == 'Chicago':
-        starttime = datum['starttime']
-        d2 = datetime.strptime(starttime, '%m/%d/%Y %H:%M')
-        day_of_week=d2.strftime('%A')
-        return (d2.month, d2.hour, day_of_week)
-    elif city == 'Washington':
-        starttime = datum['Start date']
-        d3 = datetime.strptime(starttime, '%m/%d/%Y %H:%M')
-        day_of_week=d3.strftime('%A')
-        return (d3.month, d3.hour, day_of_week)
-
-tests = {'New York City': (1, 0, 'Friday'),
-         'Chicago': (3, 23, 'Thursday'),
-         'Washington': (3, 22, 'Thursday')}
-
 
 for city in tests:
     assert time_of_trip(example_trips[city], city) == tests[city]
