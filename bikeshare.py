@@ -8,7 +8,20 @@ CITY_DATA = {'chicago': 'chicago.csv',
 
 
 def get_filters(city, month, day):
+<<<<<<< HEAD
     
+||||||| d2447f2
+    """
+    Asks user to specify a city, month, and day to analyze.
+
+    Returns:
+        (str) city - name of the city to analyze
+        (str) month - name of the month to filter by, or "all" to apply no month filter
+        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+    """
+=======
+
+>>>>>>> documentation
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
@@ -40,7 +53,7 @@ def get_filters(city, month, day):
             day = 'all'
             break
         else:
-            input("You wrote the wrong word! Please type it again. month, day, all or none?")
+            input("Wrong word! Please type it again. month, day, all or none?")
             break
 
     print(city)
@@ -51,16 +64,7 @@ def get_filters(city, month, day):
 
 
 def load_data(city, month, day):
-    """
-    Loads data for the specified city and filters by month and day if applicable.
 
-    Args:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
-    """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
@@ -80,7 +84,7 @@ def load_data(city, month, day):
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
-    print('\nCalculating The Most Frequent Times of Travel...\n')
+    print('\nCalculating Most Frequent Times of Travel...\n')
     start_time = time.time()
 
     # display the most common month
@@ -103,7 +107,7 @@ def time_stats(df):
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
+    print('\nCalculating Most Popular Stations and Trip...\n')
     start_time = time.time()
 
     # display most commonly used start station
@@ -124,7 +128,6 @@ def station_stats(df):
 
 
 def trip_duration_stats(df):
-    """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
@@ -172,19 +175,116 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
+<<<<<<< HEAD
+||||||| d2447f2
+def duration_in_mins(datum, city):
+    """
+        Takes as input a dictionary containing info about a single trip (datum) and
+        its origin city (city) and returns the trip duration in units of minutes.
+        Washington is in terms of milliseconds while Chicago and NYC
+        are in terms of seconds.
+    """
+    from datetime import datetime
+    if city == 'New York City':
+        duration = float(datum['tripduration']) / 60
+    elif city == 'Chicago':
+        duration = float(datum['tripduration']) / 60
+    elif city == 'Washington':
+        duration = float(datum['Duration (ms)']) / 60000
+    return duration
+
+tests = {'New York City': 13.9833, 'Chicago': 15.4333, 'Washington': 7.1231}
+for city in tests:
+    assert (abs(duration_in_mins(example_trips[city], city) - tests[city]) < .001)
+
+
+def time_of_trip(datum, city):
+    """
+    Takes input a dictionary containing info about a single trip (datum) and
+    its origin city (city) and returns the month, hour, and day of the week in
+    which the trip was made.
+    NYC includes seconds, while Washington and Chicago do not.
+    """
+    from datetime import datetime
+    if city == 'New York City':
+        starttime = datum['starttime']
+        d1 = datetime.strptime(starttime, '%m/%d/%Y %H:%M:%S')
+        day_of_week=d1.strftime('%A')
+        return (d1.month, d1.hour, day_of_week)
+    elif city == 'Chicago':
+        starttime = datum['starttime']
+        d2 = datetime.strptime(starttime, '%m/%d/%Y %H:%M')
+        day_of_week=d2.strftime('%A')
+        return (d2.month, d2.hour, day_of_week)
+    elif city == 'Washington':
+        starttime = datum['Start date']
+        d3 = datetime.strptime(starttime, '%m/%d/%Y %H:%M')
+        day_of_week=d3.strftime('%A')
+        return (d3.month, d3.hour, day_of_week)
+
+tests = {'New York City': (1, 0, 'Friday'),
+         'Chicago': (3, 23, 'Thursday'),
+         'Washington': (3, 22, 'Thursday')}
+
+=======
+def duration_in_mins(datum, city):
+    """
+        Takes as input a dictionary containing info about a single trip (datum) and
+        its origin city (city) and returns the trip duration in units of minutes.
+        Washington is in terms of milliseconds while Chicago and NYC
+        are in terms of seconds.
+    """
+    from datetime import datetime
+    if city == 'New York City':
+        duration = float(datum['tripduration']) / 60
+    elif city == 'Chicago':
+        duration = float(datum['tripduration']) / 60
+    elif city == 'Washington':
+        duration = float(datum['Duration (ms)']) / 60000
+    return duration
+
+tests = {'New York City': 13.9833, 'Chicago': 15.4333, 'Washington': 7.1231}
+for city in tests:
+    assert (abs(duration_in_mins(example_trips[city], city) - tests[city]) < .001)
+
+
+def time_of_trip(datum, city):
+
+    from datetime import datetime
+    if city == 'New York City':
+        starttime = datum['starttime']
+        d1 = datetime.strptime(starttime, '%m/%d/%Y %H:%M:%S')
+        day_of_week=d1.strftime('%A')
+        return (d1.month, d1.hour, day_of_week)
+    elif city == 'Chicago':
+        starttime = datum['starttime']
+        d2 = datetime.strptime(starttime, '%m/%d/%Y %H:%M')
+        day_of_week=d2.strftime('%A')
+        return (d2.month, d2.hour, day_of_week)
+    elif city == 'Washington':
+        starttime = datum['Start date']
+        d3 = datetime.strptime(starttime, '%m/%d/%Y %H:%M')
+        day_of_week=d3.strftime('%A')
+        return (d3.month, d3.hour, day_of_week)
+
+tests = {'New York City': (1, 0, 'Friday'),
+         'Chicago': (3, 23, 'Thursday'),
+         'Washington': (3, 22, 'Thursday')}
+
+>>>>>>> documentation
 
 for city in tests:
     assert time_of_trip(example_trips[city], city) == tests[city]
 def data(df):
     raw_data = 0
     while True:
-        answer = input("Do you want to see the raw data? Yes or No").lower()
+        answer = input("Wanna see the raw data? Yes or No").lower()
         if answer not in ['yes', 'no']:
-            answer = input("Wrong word. Please type Yes or No.").lower()
+            answer = input("Wrong word! Please type Yes or No.").lower()
         elif answer == 'yes':
             raw_data += 5
             print(df.iloc[raw_data: raw_data + 5])
-            again = input("Want to see more? Yes or No").lower()
+            again = input("Wanna see more? Yes or No").lower()
             if again == 'no':
                 break
         elif answer == 'no':
@@ -205,7 +305,7 @@ def main():
         user_stats(df)
         data(df)
 
-        restart = input('\nRestart? Enter yes or no.\n')
+        restart = input('\nDo you want to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
 
